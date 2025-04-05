@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>color change reset 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Move content to the bottom */
+            height: 100vh;
+            transition: background-color 0.5s ease-out;
+            
+        }
+
+        #color-btn,
+        #reset-btn {
+            border-radius: 60px;
+            padding: 10px 20px;
+            font-size: 20px;
+            border: 2px solid #ff3131;
+            background-color: #000;
+            color: #39ff14;
+            margin: 5px;
+            cursor: pointer; /* Add cursor style for better UX */
+        }
+    </style>
+</head>
+<body>
+
+    <button id="color-btn" onclick="changeBackgroundColor()">Change Colors</button>
+    <button id="reset-btn" onclick="resetBackgroundColor()">Reset Colors</button>
+
+    <script>
+        const colors = ['orange', 'black', 'skyblue', 'grey'];
+        let currentColorIndex = 0; // Start with black as the default color
+        let stopColorChange = false;
+
+        function changeBackgroundColor() {
+            if (stopColorChange) {
+                return;
+            }
+
+            const nextColor = colors[currentColorIndex];
+            document.body.style.backgroundColor = nextColor;
+
+            if (nextColor === 'grey') {
+                stopColorChange = true;
+                return;
+            }
+
+            currentColorIndex = (currentColorIndex + 1) % colors.length;
+        }
+
+        function resetBackgroundColor() {
+            document.body.style.backgroundColor = 'white'; // Set the default color to white
+            currentColorIndex = 0; // Reset to black as the default color
+            stopColorChange = false; // Reset the flag to allow color change again
+        }
+    </script>
+</body>
+</html>
